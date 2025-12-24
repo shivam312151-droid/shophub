@@ -28,11 +28,11 @@ public class ProductServlet extends HttpServlet {
         products.add(new Product(3, "Headphones", "Wireless noise-canceling headphones", 16599,
             "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=1000&h=800&fit=crop&q=80", 20));
         products.add(new Product(4, "Tablet", "10-inch tablet", 37349,
-            "https://images.unsplash.com/photo-1544716278-ca5e3af8abd8?w=1000&h=800&fit=crop&q=80", 12));
+            "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1000&h=800&fit=crop&q=80", 12));
         products.add(new Product(5, "Smartwatch", "Fitness tracking smartwatch", 24899,
             "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1000&h=800&fit=crop&q=80", 25));
         products.add(new Product(6, "Camera", "Digital camera 4K", 66399,
-            "https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=1000&h=800&fit=crop&q=80", 8));
+            "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=1000&h=800&fit=crop&q=80", 8));
     }
 
     @Override
