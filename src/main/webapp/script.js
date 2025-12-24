@@ -70,6 +70,12 @@ async function updateCartCount() {
     } catch {}
 }
 
+function getImageUrl(imageUrl, productName = 'Product') {
+    return (imageUrl && imageUrl.startsWith('http'))
+        ? imageUrl
+        : `https://via.placeholder.com/400x250?text=${encodeURIComponent(productName)}`;
+}
+
 function displayProducts(products, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -79,13 +85,11 @@ function displayProducts(products, containerId) {
     }
     container.innerHTML = '';
     products.forEach(product => {
-        const imageUrl = (product.imageUrl && product.imageUrl.startsWith('http'))
-            ? product.imageUrl
-            : `https://via.placeholder.com/400x250?text=${encodeURIComponent(product.name || 'Product')}`;
+        const imageUrl = getImageUrl(product.imageUrl, product.name);
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.innerHTML = `
-            <img src="${imageUrl}" alt="${product.name}">
+            <img src="${imageUrl}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400x250?text=${encodeURIComponent(product.name)}';">
             <div class="product-info">
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>

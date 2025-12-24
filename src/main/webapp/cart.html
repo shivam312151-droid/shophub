@@ -84,9 +84,10 @@
                 subtotal += itemTotal;
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
+                const cartImageUrl = getImageUrl(product.imageUrl, product.name);
                 cartItem.innerHTML = `
                     <div class="cart-item-image">
-                        <img src="${product.imageUrl}" alt="${product.name}">
+                        <img src="${cartImageUrl}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x200?text=${encodeURIComponent(product.name)}';"/>
                     </div>
                     <div class="cart-item-details">
                         <h3>${product.name}</h3>
