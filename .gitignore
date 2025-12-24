@@ -1,0 +1,37 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs
+target/
+build/
+dist/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Binaries
+*.bin
+simple-server/bin/
+
+# Temp
+*.tmp
+*.temp
+.env.local
+
+# OS
+Thumbs.db

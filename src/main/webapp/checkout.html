@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - E-Commerce Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>ShopHub</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="checkout.html" class="active">Checkout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="checkout-section">
+            <div class="container">
+                <h2>Checkout</h2>
+                <div class="checkout-container">
+                    <div class="checkout-form">
+                        <form id="checkout-form">
+                            <h3>Shipping Information</h3>
+                            <div class="form-group"><label for="fullname">Full Name *</label><input type="text" id="fullname" name="fullname" required></div>
+                            <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required></div>
+                            <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" name="phone" required></div>
+                            <div class="form-group"><label for="address">Address *</label><input type="text" id="address" name="address" required></div>
+                            <div class="form-row">
+                                <div class="form-group"><label for="city">City *</label><input type="text" id="city" name="city" required></div>
+                                <div class="form-group"><label for="state">State *</label><input type="text" id="state" name="state" required></div>
+                                <div class="form-group"><label for="zip">ZIP Code *</label><input type="text" id="zip" name="zip" required></div>
+                            </div>
+                            <h3>Payment Information</h3>
+                            <div class="form-group"><label for="cardname">Cardholder Name *</label><input type="text" id="cardname" name="cardname" required></div>
+                            <div class="form-group"><label for="cardnumber">Card Number *</label><input type="text" id="cardnumber" name="cardnumber" placeholder="1234 5678 9012 3456" required></div>
+                            <div class="form-row">
+                                <div class="form-group"><label for="expiry">Expiry Date *</label><input type="text" id="expiry" name="expiry" placeholder="MM/YY" required></div>
+                                <div class="form-group"><label for="cvv">CVV *</label><input type="text" id="cvv" name="cvv" placeholder="123" required></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+                        </form>
+                    </div>
+                    <div class="order-summary-sidebar">
+                        <h3>Order Summary</h3>
+                        <div id="checkout-items"></div>
+                        <hr>
+                        <div class="summary-row"><span>Subtotal:</span><span id="checkout-subtotal">$0.00</span></div>
+                        <div class="summary-row"><span>Shipping:</span><span id="checkout-shipping">$0.00</span></div>
+                        <div class="summary-row"><span>Tax:</span><span id="checkout-tax">$0.00</span></div>
+                        <hr>
+                        <div class="summary-row total"><span><strong>Total:</strong></span><span id="checkout-total"><strong>$0.00</strong></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ShopHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCheckoutSummary();
+            updateCartCount();
+            document.getElementById('checkout-form').addEventListener('submit', handleCheckout);
+        });
+        async function loadCheckoutSummary() {
+            try {
+                const cart = await fetchCart();
+                if (!cart || !cart.items || Object.keys(cart.items).length === 0) {
+                    alert('Your cart is empty!');
+                    window.location.href = 'products.html';
+                    return;
+                }
+                const checkoutItems = document.getElementById('checkout-items');
+                checkoutItems.innerHTML = '';
+                let subtotal = 0;
+                for (const [productId, item] of Object.entries(cart.items)) {
+                    const product = item.product;
+                    const quantity = item.quantity;
+                    const itemTotal = product.price * quantity;
+                    subtotal += itemTotal;
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'checkout-item';
+                    itemDiv.innerHTML = `<div class="checkout-item-info"><span>${product.name} x ${quantity}</span><span>$${itemTotal.toFixed(2)}</span></div>`;
+                    checkoutItems.appendChild(itemDiv);
+                }
+                const shipping = subtotal > 50 ? 0 : 10;
+                const tax = subtotal * 0.08;
+                const total = subtotal + shipping + tax;
+                document.getElementById('checkout-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('checkout-shipping').textContent = `$${shipping.toFixed(2)}`;
+                document.getElementById('checkout-tax').textContent = `$${tax.toFixed(2)}`;
+                document.getElementById('checkout-total').textContent = `$${total.toFixed(2)}`;
+            } catch (error) { console.error('Error loading checkout summary:', error); }
+        }
+        async function handleCheckout(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const orderData = Object.fromEntries(formData.entries());
+            try {
+                const response = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(orderData) });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    alert(`Order placed successfully! Order ID: ${result.orderId}`);
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) { console.error('Error during checkout:', error); alert('An error occurred. Please try again.'); }
+        }
+    </script>
+</body>
+</html>

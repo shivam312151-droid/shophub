@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>ShopHub</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Welcome to ShopHub</h2>
+                    <p>Your one-stop shop for amazing products</p>
+                    <a href="products.html" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <div class="container">
+                <h2>Featured Products</h2>
+                <div class="product-grid" id="featured-products">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🚚 Free Shipping</h3>
+                        <p>On orders over $50</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔒 Secure Payment</h3>
+                        <p>100% secure transactions</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>↩️ Easy Returns</h3>
+                        <p>30-day return policy</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎧 24/7 Support</h3>
+                        <p>Dedicated customer service</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ShopHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load featured products on home page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFeaturedProducts();
+            updateCartCount();
+        });
+
+        async function loadFeaturedProducts() {
+            try {
+                const products = await fetchProducts();
+                const featuredProducts = products.slice(0, 3);
+                displayProducts(featuredProducts, 'featured-products');
+            } catch (error) {
+                console.error('Error loading featured products:', error);
+            }
+        }
+    </script>
+</body>
+</html>
