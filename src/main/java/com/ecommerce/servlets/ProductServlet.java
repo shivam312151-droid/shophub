@@ -22,17 +22,17 @@ public class ProductServlet extends HttpServlet {
         gson = new Gson();
         products = new ArrayList<>();
         products.add(new Product(1, "Laptop", "High-performance laptop", 82999,
-            "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80", 10));
+            "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1000&h=800&fit=crop&q=80", 10));
         products.add(new Product(2, "Smartphone", "Latest smartphone model", 58099,
-            "https://images.unsplash.com/photo-1592286927505-1def25115558?w=1000&h=800&fit=crop&q=80", 15));
+            "https://images.unsplash.com/photo-1511707267537-b85faf00021e?w=1000&h=800&fit=crop&q=80", 15));
         products.add(new Product(3, "Headphones", "Wireless noise-canceling headphones", 16599,
-            "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80", 20));
+            "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=1000&h=800&fit=crop&q=80", 20));
         products.add(new Product(4, "Tablet", "10-inch tablet", 37349,
-            "https://images.unsplash.com/photo-1579321572759-e3fb039a6e3f?w=1000&h=800&fit=crop&q=80", 12));
+            "https://images.unsplash.com/photo-1544716278-ca5e3af8abd8?w=1000&h=800&fit=crop&q=80", 12));
         products.add(new Product(5, "Smartwatch", "Fitness tracking smartwatch", 24899,
-            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80", 25));
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1000&h=800&fit=crop&q=80", 25));
         products.add(new Product(6, "Camera", "Digital camera 4K", 66399,
-            "https://images.unsplash.com/photo-1606986628025-35d57e735ae0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80", 8));
+            "https://images.unsplash.com/photo-1606986628025-35d57e735ae0?w=1000&h=800&fit=crop&q=80", 8));
     }
 
     @Override
