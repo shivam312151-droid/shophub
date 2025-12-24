@@ -112,6 +112,25 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             const orderData = Object.fromEntries(formData.entries());
+            
+            // Validate form
+            if (!orderData.fullname || !orderData.email || !orderData.phone || !orderData.address) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            if (!orderData.email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            if (orderData.phone.length < 10) {
+                alert('Please enter a valid phone number');
+                return;
+            }
+            if (!orderData.cardnumber || orderData.cardnumber.replace(/\s/g, '').length < 13) {
+                alert('Please enter a valid card number');
+                return;
+            }
+            
             try {
                 const response = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(orderData) });
                 const result = await response.json();

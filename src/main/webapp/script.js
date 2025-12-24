@@ -5,7 +5,8 @@ async function fetchProducts() {
         const response = await fetch(`${API_BASE_URL}/products`);
         if (!response.ok) throw new Error('Failed to fetch products');
         return await response.json();
-    } catch {
+    } catch (error) {
+        console.error('Error fetching products:', error);
         return [];
     }
 }
@@ -15,7 +16,8 @@ async function fetchCart() {
         const response = await fetch(`${API_BASE_URL}/cart`);
         if (!response.ok) throw new Error('Failed to fetch cart');
         return await response.json();
-    } catch {
+    } catch (error) {
+        console.error('Error fetching cart:', error);
         return { items: {}, total: 0, itemCount: 0 };
     }
 }
@@ -45,9 +47,13 @@ async function removeFromCart(productId) {
             body: JSON.stringify({ action: 'remove', productId })
         });
         if (!response.ok) throw new Error('Failed to remove from cart');
+        showNotification('Product removed from cart');
         updateCartCount();
         if (window.location.pathname.includes('cart.html')) location.reload();
-    } catch {}
+    } catch (error) {
+        console.error('Error removing from cart:', error);
+        showNotification('Failed to remove product', 'error');
+    }
 }
 
 async function updateCart(productId, action, quantity = 1) {
@@ -59,7 +65,10 @@ async function updateCart(productId, action, quantity = 1) {
         });
         if (!response.ok) throw new Error('Failed to update cart');
         return await response.json();
-    } catch {}
+    } catch (error) {
+        console.error('Error updating cart:', error);
+        showNotification('Failed to update cart', 'error');
+    }
 }
 
 async function updateCartCount() {
@@ -67,7 +76,9 @@ async function updateCartCount() {
         const cart = await fetchCart();
         const count = cart.itemCount || 0;
         document.querySelectorAll('#cart-count').forEach(el => el.textContent = count);
-    } catch {}
+    } catch (error) {
+        console.error('Error updating cart count:', error);
+    }
 }
 
 function getImageUrl(imageUrl, productName = 'Product') {
