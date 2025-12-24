@@ -56,12 +56,12 @@ public class Main {
         int port = Integer.parseInt(System.getenv().getOrDefault("PORT", "8080"));
         Path webRoot = Paths.get("src/main/webapp").toAbsolutePath();
         List<Product> products = List.of(
-                new Product(1, "Laptop", "High-performance laptop", 999.99, "https://images.unsplash.com/photo-1588405748488-1d7d1b92c3d5?w=500&h=400&fit=crop&q=80", 10),
-                new Product(2, "Smartphone", "Latest smartphone model", 699.99, "https://images.unsplash.com/photo-1592286927505-1def25e329c7?w=500&h=400&fit=crop&q=80", 15),
-                new Product(3, "Headphones", "Wireless noise-canceling headphones", 199.99, "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=500&h=400&fit=crop&q=80", 20),
-                new Product(4, "Tablet", "10-inch tablet", 449.99, "https://images.unsplash.com/photo-1544716278-ca5e3af8abd8?w=500&h=400&fit=crop&q=80", 12),
-                new Product(5, "Smartwatch", "Fitness tracking smartwatch", 299.99, "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&h=400&fit=crop&q=80", 25),
-                new Product(6, "Camera", "Digital camera 4K", 799.99, "https://images.unsplash.com/photo-1610933015033-333e1a1ebf24?w=500&h=400&fit=crop&q=80", 8)
+                new Product(1, "Laptop", "High-performance laptop", 82999, "https://images.unsplash.com/photo-1588405748488-1d7d1b92c3d5?w=500&h=400&fit=crop&q=80", 10),
+                new Product(2, "Smartphone", "Latest smartphone model", 58099, "https://images.unsplash.com/photo-1592286927505-1def25e329c7?w=500&h=400&fit=crop&q=80", 15),
+                new Product(3, "Headphones", "Wireless noise-canceling headphones", 16599, "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=500&h=400&fit=crop&q=80", 20),
+                new Product(4, "Tablet", "10-inch tablet", 37349, "https://images.unsplash.com/photo-1544716278-ca5e3af8abd8?w=500&h=400&fit=crop&q=80", 12),
+                new Product(5, "Smartwatch", "Fitness tracking smartwatch", 24899, "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&h=400&fit=crop&q=80", 25),
+                new Product(6, "Camera", "Digital camera 4K", 66399, "https://images.unsplash.com/photo-1610933015033-333e1a1ebf24?w=500&h=400&fit=crop&q=80", 8)
         );
         Cart cart = new Cart();
 

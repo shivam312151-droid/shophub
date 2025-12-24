@@ -89,7 +89,7 @@ function displayProducts(products, containerId) {
             <div class="product-info">
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
-                <div class="product-price">$${product.price.toFixed(2)}</div>
+                <div class="product-price">₹${product.price.toFixed(0)}</div>
                 <p class="product-stock">In Stock: ${product.stock}</p>
                 <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to Cart</button>
             </div>`;
